@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">HotShare</string>
+    <string name="client_button">Client</string>
+    <string name="cl_ac_get_wifi">Get Wifi</string>
+    <string name="provider_button">Provider</string>
+    <string name="pr_ac_share_wifi">Share Wifi</string>
 </resources>

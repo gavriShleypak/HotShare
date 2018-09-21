@@ -1,83 +1,53 @@
 package com.example.yarden.hotshare;
 
-import android.Manifest;
-import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
-import android.net.Uri;
 import android.net.wifi.WifiManager;
-import android.os.Build;
-import android.provider.Settings;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+
+import com.example.yarden.hotshare.Client.ClientActivity;
+import com.example.yarden.hotshare.Client.DataUsage;
+import com.example.yarden.hotshare.Provider.ProviderActivity;
+import com.example.yarden.hotshare.Provider.ShareWifi;
 
 public class MainActivity extends AppCompatActivity {
 
     private WifiManager wifiManager;
-    private GetWifi getWifi;
     private ShareWifi shareWifi;
-
+    private Button ClientButton;
+    private Button ProviderButton;
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         wifiManager = (WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE);
-        getWifi = new GetWifi(wifiManager);
+
         final DataUsage dataUsage = new DataUsage(wifiManager);
-        final Button getWifibutton = findViewById(R.id.GetWifiButton);
-        final ConnectivityManager manager = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
-        getWifibutton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
+        final Button getWifibutton = findViewById(R.id.cl_ac_get_wifi_bu);
 
-                try {
-                    getWifi.enableWifi();
-                    getWifi.ConnectToWifi();
-                    dataUsage.StartCountDataUsage(); // in anthor thred!
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+        ProviderButton = (Button) findViewById(R.id.bt_provider);
+        ProviderButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), ProviderActivity.class);
+                startActivity(intent);
             }
         });
-
-        shareWifi = new ShareWifi(wifiManager);
-        final Button shareWifibutton = findViewById(R.id.ShareWifiButton);
-        shareWifibutton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-
-                try {
-                    if(!shareWifi.GetHotspotStatus())
-                        HotSpotDialog();
-
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+        ClientButton = (Button) findViewById(R.id.bt_client);
+        ClientButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), ClientActivity.class);
+                startActivity(intent);
             }
         });
     }
 
-    public void HotSpotDialog() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("HotSpot is disable");
-
-        builder.setPositiveButton("Ok",
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        Log.d("Hotspot Dialog", "ok");
-                    }
-                });
-        builder.show();
-    }
 
 
 }

@@ -1,4 +1,4 @@
-package com.example.yarden.hotshare;
+package com.example.yarden.hotshare.Client;
 
 
 import android.app.usage.NetworkStats;

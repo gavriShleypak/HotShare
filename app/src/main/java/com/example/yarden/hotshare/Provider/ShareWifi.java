@@ -1,4 +1,4 @@
-package com.example.yarden.hotshare;
+package com.example.yarden.hotshare.Provider;
 
 import android.Manifest;
 import android.content.Context;

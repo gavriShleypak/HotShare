@@ -1,4 +1,4 @@
-package com.example.yarden.hotshare;
+package com.example.yarden.hotshare.Client;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
