@@ -23,6 +23,8 @@ public class DataUsage {
     private long  startDown  ;
     private float totalMb;
 
+
+
     public DataUsage(WifiManager _wifiManager){wifiManager=_wifiManager;}
 
     public void StartCountDataUsage(  ){
